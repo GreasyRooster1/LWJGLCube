@@ -1,11 +1,15 @@
 package main;
 
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import main.Shaders.ColorShader;
 import main.Shaders.TextureShader;
 import main.Texture.Texture;
+import org.joml.Matrix4f;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
+import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.glfw.Callbacks;
@@ -20,6 +24,9 @@ import static org.lwjgl.opengl.GL33.*;
 public class Main {
 
     private long window;
+
+    public static int WIDTH = 800;
+    public static int HEIGHT = 600;
 
     public void run(){
         init();
@@ -46,7 +53,7 @@ public class Main {
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
 
-        window = GLFW.glfwCreateWindow(640, 480, "Cube", NULL, NULL);
+        window = GLFW.glfwCreateWindow(WIDTH, HEIGHT, "Cube", NULL, NULL);
         if(window == NULL) {
             throw new IllegalStateException("Unable to create GLFW Window");
         }
@@ -85,11 +92,13 @@ public class Main {
         };
 
         float[] uvs = {
-                0.0f,0.0f,
-                1.0f,0.0f,
-                1.0f,1.0f,
-                0.0f,1.0f
+                1f,  1f,  // top right
+                1f, 0f,  // bottom right
+                0f, 0f,  // bottom left
+                0f,  1f
         };
+
+        Projection projection = new Projection();
 
         Mesh meshmeyek = MeshLoader.createMesh(vertices,uvs,indices);
 
@@ -100,6 +109,7 @@ public class Main {
         while(!GLFW.glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
+            textureShader.passProjection(projection);
             textureShader.use();
             glBindVertexArray(meshmeyek.getVaoID());
             glEnableVertexAttribArray(0);
