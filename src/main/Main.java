@@ -5,6 +5,7 @@ import java.nio.IntBuffer;
 import main.Mesh.Mesh;
 import main.Mesh.MeshLoader;
 import main.Mesh.MeshObject;
+import main.Resources.ResourceLoader;
 import main.Shaders.TextureShader;
 import main.Texture.Texture;
 import org.joml.Vector3f;
@@ -97,6 +98,9 @@ public class Main {
                 0f, 0f,
                 0f,  1f
         };
+
+        ResourceLoader resources = new ResourceLoader("resources");
+        resources.loadAllResources();
 
         Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
 
