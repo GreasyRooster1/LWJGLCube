@@ -17,7 +17,7 @@ public class MeshObject {
     public ProjectionShaderProgram shader;
     public Texture texture;
 
-    MeshObject(Mesh mesh,ProjectionShaderProgram shader) {
+    public MeshObject(Mesh mesh, ProjectionShaderProgram shader) {
         this.mesh = mesh;
         this.shader = shader;
     }
@@ -29,7 +29,7 @@ public class MeshObject {
         glBindVertexArray(mesh.getVaoID());
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
-        if(texture==null) {
+        if(texture!=null) {
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, texture.textureID);
         }

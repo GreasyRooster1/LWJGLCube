@@ -3,6 +3,8 @@ package main;
 import java.nio.IntBuffer;
 
 import main.Mesh.Mesh;
+import main.Mesh.MeshLoader;
+import main.Mesh.MeshObject;
 import main.Shaders.TextureShader;
 import main.Texture.Texture;
 import org.joml.Vector3f;
@@ -90,19 +92,19 @@ public class Main {
         };
 
         float[] uvs = {
-                1f,  1f,  // top right
-                1f, 0f,  // bottom right
-                0f, 0f,  // bottom left
+                1f,  1f,
+                1f, 0f,
+                0f, 0f,
                 0f,  1f
         };
 
         Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
 
-        Mesh meshmeyek = MeshLoader.createMesh(vertices,uvs,indices);
+        MeshObject cube = new MeshObject(MeshLoader.createMesh(vertices,uvs,indices), new TextureShader());
+        cube.texture = new Texture("resources/textures/065.png");
 
         glClearColor(0.1f,0.2f,0.3f,1.0f);
-        TextureShader textureShader = new TextureShader();
-        Texture texture = new Texture("resources/textures/065.png");
+
 
         while(!GLFW.glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -113,7 +115,7 @@ public class Main {
                     (float)sin(GLFW.glfwGetTime())*3
             ));
 
-
+            cube.render(camera);
 
             GLFW.glfwSwapBuffers(window);
             GLFW.glfwPollEvents();
