@@ -17,6 +17,8 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.opengl.GL33.*;
@@ -108,6 +110,12 @@ public class Main {
 
         while(!GLFW.glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+            camera.setPosition(new Vector3f(
+                    (float)cos(GLFW.glfwGetTime())*3,
+                    1f,
+                    (float)sin(GLFW.glfwGetTime())*3
+            ));
 
             textureShader.passCamera(camera);
             textureShader.setUniformMatrix4f("model",new Matrix4f());
