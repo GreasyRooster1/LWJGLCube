@@ -7,6 +7,8 @@ import java.io.File;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+
+import static org.lwjgl.opengl.GL11.glBindTexture;
 import static org.lwjgl.opengl.GL33.*;
 
 public class Texture {
@@ -40,6 +42,7 @@ public class Texture {
 
             glGenerateMipmap(GL_TEXTURE_2D);
             STBImage.stbi_image_free(buffer);
+            glBindTexture(GL_TEXTURE_2D,0);
             
         }catch(Exception e){
             e.printStackTrace();
