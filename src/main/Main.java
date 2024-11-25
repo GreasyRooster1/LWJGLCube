@@ -1,15 +1,11 @@
 package main;
 
-import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import main.Shaders.ColorShader;
+import main.Mesh.Mesh;
 import main.Shaders.TextureShader;
 import main.Texture.Texture;
-import org.joml.Matrix4f;
 import org.joml.Vector3f;
-import org.joml.Vector4f;
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.glfw.Callbacks;
@@ -117,18 +113,7 @@ public class Main {
                     (float)sin(GLFW.glfwGetTime())*3
             ));
 
-            textureShader.passCamera(camera);
-            textureShader.setUniformMatrix4f("model",new Matrix4f());
-            textureShader.use();
-            glBindVertexArray(meshmeyek.getVaoID());
-            glEnableVertexAttribArray(0);
-            glEnableVertexAttribArray(1);
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, texture.textureID);
-            glDrawElements(GL_TRIANGLES, meshmeyek.getVertexCount(), GL_UNSIGNED_INT,0);
-            glDisableVertexAttribArray(0);
-            glDisableVertexAttribArray(1);
-            glBindVertexArray(0);
+
 
             GLFW.glfwSwapBuffers(window);
             GLFW.glfwPollEvents();

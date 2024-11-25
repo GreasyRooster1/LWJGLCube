@@ -30,4 +30,8 @@ public abstract class ProjectionShaderProgram extends ShaderProgram {
         setUniformMatrix4f("projection",camera.getProjection());
         setUniformMatrix4f("view",camera.getView());
     }
+
+    public void passModel(Matrix4f model){
+        setUniformMatrix4f("model",model);
+    }
 }
