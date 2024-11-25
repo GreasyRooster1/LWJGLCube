@@ -11,6 +11,8 @@ public class Camera {
     private Vector3f position;
     private Vector3f direction;
 
+    private Vector3f lookAtPosition;
+
     private Matrix4f projection;
     private Matrix4f view;
 
@@ -24,18 +26,21 @@ public class Camera {
         farClip = 100f;
 
         this.position = position;
-        direction = position.sub(target).normalize();
 
-        recalculate();
+        lookAt(target);
     }
 
     public void recalculate() {
         projection = new Matrix4f().perspective((float) Math.toRadians(fov), (float)WIDTH/(float)HEIGHT, nearClip, farClip);
-        view = new Matrix4f().translate(position);
+        if(lookAtPosition==null) {
+            view = new Matrix4f().translate(position);
+            return;
+        }
+        view = new Matrix4f().lookAt(position,lookAtPosition,new Vector3f(0f,1f,0f));
     }
 
     public void lookAt(Vector3f target){
-        direction = position.sub(target).normalize();
+        lookAtPosition = target;
         recalculate();
     }
 

@@ -1,5 +1,6 @@
 package main.Shaders;
 
+import main.Camera;
 import main.Files;
 import main.Projection;
 import org.joml.Matrix4f;
@@ -25,9 +26,8 @@ public abstract class ProjectionShaderProgram extends ShaderProgram {
         bindAttribute(1,"texCoords");
     }
 
-    public void passProjection(Projection proj){
-        setUniformMatrix4f("projection",proj.projection);
-        setUniformMatrix4f("model",proj.model);
-        setUniformMatrix4f("view",proj.view);
+    public void passCamera(Camera camera){
+        setUniformMatrix4f("projection",camera.getProjection());
+        setUniformMatrix4f("view",camera.getView());
     }
 }

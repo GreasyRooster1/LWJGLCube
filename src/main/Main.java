@@ -98,7 +98,7 @@ public class Main {
                 0f,  1f
         };
 
-        Projection projection = new Projection();
+        Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
 
         Mesh meshmeyek = MeshLoader.createMesh(vertices,uvs,indices);
 
@@ -109,7 +109,8 @@ public class Main {
         while(!GLFW.glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-            textureShader.passProjection(projection);
+            textureShader.passCamera(camera);
+            textureShader.setUniformMatrix4f("model",new Matrix4f());
             textureShader.use();
             glBindVertexArray(meshmeyek.getVaoID());
             glEnableVertexAttribArray(0);
