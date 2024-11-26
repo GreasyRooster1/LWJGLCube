@@ -21,16 +21,25 @@ public class ResourceLoader {
         if (directoryListing != null) {
             for (File child : directoryListing) {
                 if (child.isDirectory()) {
-                    loadResources(stub+"\\"+child.getName());
+                    if(stub.isEmpty()){
+                        loadResources(child.getName());
+                    }else {
+                        loadResources(stub + "\\" + child.getName());
+                    }
                 }else{
-                    resources.put(stub+"\\"+child.getName(),parseResource(resourceLocation+"\\"+stub+"\\"+child.getName()));
+                    String name = stub+"/"+child.getName();
+                    resources.put(name.replace("\\","/"),parseResource(resourceLocation+"\\"+stub+"\\"+child.getName()));
                 }
             }
         }
     }
 
     public Resource parseResource(String path){
-        return new Resource(path);
+        String type = path.substring(path.lastIndexOf(".")+1);
+        if(type.equals("png")||type.equals("jpg")||type.equals("jpeg")){
+            return new TextureResource(path);
+        }
+        return null;
     }
 
     public Resource getResource(String identifier){

@@ -105,10 +105,9 @@ public class Main {
         Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
 
         MeshObject cube = new MeshObject(MeshLoader.createMesh(vertices,uvs,indices), new TextureShader());
-        cube.texture = new Texture("resources/textures/065.png");
+        cube.texture = (Texture) resources.getResource("textures/065.png").get();
 
         glClearColor(0.1f,0.2f,0.3f,1.0f);
-
 
         while(!GLFW.glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
