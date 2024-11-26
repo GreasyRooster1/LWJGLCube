@@ -39,6 +39,9 @@ public class ResourceLoader {
         if(type.equals("png")||type.equals("jpg")||type.equals("jpeg")){
             return new TextureResource(path);
         }
+        if(type.equals("obj")){
+            return new MeshResource(path);
+        }
         return null;
     }
 
