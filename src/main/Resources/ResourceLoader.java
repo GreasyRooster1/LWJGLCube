@@ -42,7 +42,11 @@ public class ResourceLoader {
         return null;
     }
 
-    public Resource getResource(String identifier){
+    public Resource getRawResource(String identifier){
         return resources.get(identifier);
+    }
+
+    public Object getResource(String identifier){
+        return resources.get(identifier).get();
     }
 }
