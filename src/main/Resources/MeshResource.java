@@ -75,11 +75,11 @@ public class MeshResource extends Resource {
                 normalIndices.add(Integer.parseInt(v3[2])-1);
             }
         }
-        float[] outUv = new float[uvIndices.size()*2];
+        float[] outUv = new float[uvs.size()*2];
         int c =0;
-        for (int i : uvIndices) {
-            outUv[c] = uvs.get(i).x;
-            outUv[c+1] = uvs.get(i).y;
+        for (Vector2f uv : uvs) {
+            outUv[c] = uv.x;
+            outUv[c+1] = uv.y;
             c+=2;
         }
 
