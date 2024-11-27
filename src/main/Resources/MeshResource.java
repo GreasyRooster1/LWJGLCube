@@ -21,6 +21,7 @@ public class MeshResource extends Resource {
 
     @Override
     public void load() {
+        System.out.println(path);
         ArrayList<Integer> vertexIndices = new ArrayList<>();
         ArrayList<Integer> uvIndices  = new ArrayList<>();
         ArrayList<Integer> normalIndices  = new ArrayList<>();
