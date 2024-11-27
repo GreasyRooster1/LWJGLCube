@@ -40,39 +40,43 @@ public class MeshResource extends Resource {
         while (scanner.hasNextLine()) {
             String currentLine = scanner.nextLine();
             String[] words = currentLine.split(" ");
-            if(currentLine.startsWith("vt")) {
-                Vector2f uv = new Vector2f();
-                uv.x = Float.parseFloat(words[1]);
-                uv.y = Float.parseFloat(words[2]);
-                uvs.add(uv);
-            }else if(currentLine.startsWith("vn")) {
-                Vector3f normal = new Vector3f();
-                normal.x = Float.parseFloat(words[1]);
-                normal.y = Float.parseFloat(words[2]);
-                normal.z = Float.parseFloat(words[3]);
-                normals.add(normal);
-            }else if(currentLine.startsWith("v")) {
-                Vector3f vertex = new Vector3f();
-                vertex.x = Float.parseFloat(words[1]);
-                vertex.y = Float.parseFloat(words[2]);
-                vertex.z = Float.parseFloat(words[3]);
+            switch (words[0]) {
+                case "vt":
+                    Vector2f uv = new Vector2f();
+                    uv.x = Float.parseFloat(words[1]);
+                    uv.y = Float.parseFloat(words[2]);
+                    uvs.add(uv);
+                    break;
+                case "vn":
+                    Vector3f normal = new Vector3f();
+                    normal.x = Float.parseFloat(words[1]);
+                    normal.y = Float.parseFloat(words[2]);
+                    normal.z = Float.parseFloat(words[3]);
+                    normals.add(normal);
+                    break;
+                case "v":
+                    Vector3f vertex = new Vector3f();
+                    vertex.x = Float.parseFloat(words[1]);
+                    vertex.y = Float.parseFloat(words[2]);
+                    vertex.z = Float.parseFloat(words[3]);
+                    vertices.add(vertex);
+                    break;
+                case "f":
+                    String[] v1 = words[1].split("/");
+                    String[] v2 = words[2].split("/");
+                    String[] v3 = words[3].split("/");
+                    vertexIndices.add(Integer.parseInt(v1[0])-1);
+                    vertexIndices.add(Integer.parseInt(v2[0])-1);
+                    vertexIndices.add(Integer.parseInt(v3[0])-1);
 
-                vertices.add(vertex);
-            }else if(currentLine.startsWith("f")) {
-                String[] v1 = words[1].split("/");
-                String[] v2 = words[2].split("/");
-                String[] v3 = words[3].split("/");
-                vertexIndices.add(Integer.parseInt(v1[0])-1);
-                vertexIndices.add(Integer.parseInt(v2[0])-1);
-                vertexIndices.add(Integer.parseInt(v3[0])-1);
+                    uvIndices.add(Integer.parseInt(v1[1])-1);
+                    uvIndices.add(Integer.parseInt(v2[1])-1);
+                    uvIndices.add(Integer.parseInt(v3[1])-1);
 
-                uvIndices.add(Integer.parseInt(v1[1])-1);
-                uvIndices.add(Integer.parseInt(v2[1])-1);
-                uvIndices.add(Integer.parseInt(v3[1])-1);
-
-                normalIndices.add(Integer.parseInt(v1[2])-1);
-                normalIndices.add(Integer.parseInt(v2[2])-1);
-                normalIndices.add(Integer.parseInt(v3[2])-1);
+                    normalIndices.add(Integer.parseInt(v1[2])-1);
+                    normalIndices.add(Integer.parseInt(v2[2])-1);
+                    normalIndices.add(Integer.parseInt(v3[2])-1);
+                    break;
             }
         }
         float[] outUv = new float[uvs.size()*2];
