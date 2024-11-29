@@ -2,10 +2,13 @@ package main;
 
 import java.nio.IntBuffer;
 
-import main.Shaders.ColorShader;
+import main.Mesh.Mesh;
+import main.Mesh.MeshLoader;
+import main.Mesh.MeshObject;
+import main.Resources.ResourceLoader;
 import main.Shaders.TextureShader;
 import main.Texture.Texture;
-import org.joml.Vector4f;
+import org.joml.Vector3f;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.system.MemoryStack;
 import org.lwjgl.glfw.Callbacks;
@@ -13,6 +16,8 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.opengl.GL33.*;
@@ -20,6 +25,9 @@ import static org.lwjgl.opengl.GL33.*;
 public class Main {
 
     private long window;
+
+    public static int WIDTH = 800;
+    public static int HEIGHT = 600;
 
     public void run(){
         init();
@@ -46,7 +54,7 @@ public class Main {
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
 
-        window = GLFW.glfwCreateWindow(640, 480, "Cube", NULL, NULL);
+        window = GLFW.glfwCreateWindow(WIDTH, HEIGHT, "Cube", NULL, NULL);
         if(window == NULL) {
             throw new IllegalStateException("Unable to create GLFW Window");
         }
@@ -85,31 +93,32 @@ public class Main {
         };
 
         float[] uvs = {
-                0.0f,0.0f,
-                1.0f,0.0f,
-                1.0f,1.0f,
-                0.0f,1.0f
+                1f,  1f,
+                1f, 0f,
+                0f, 0f,
+                0f,  1f
         };
 
-        Mesh meshmeyek = MeshLoader.createMesh(vertices,uvs,indices);
+        ResourceLoader resources = new ResourceLoader("resources");
+        resources.loadAllResources();
+
+        Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
+
+        MeshObject cube = new MeshObject((Mesh) resources.getResource("models/monkey.obj"), new TextureShader());
+        cube.texture = (Texture) resources.getResource("textures/065.png");
 
         glClearColor(0.1f,0.2f,0.3f,1.0f);
-        TextureShader textureShader = new TextureShader();
-        Texture texture = new Texture("resources/textures/065.png");
 
         while(!GLFW.glfwWindowShouldClose(window)) {
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-            textureShader.use();
-            glBindVertexArray(meshmeyek.getVaoID());
-            glEnableVertexAttribArray(0);
-            glEnableVertexAttribArray(1);
-            glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, texture.textureID);
-            glDrawElements(GL_TRIANGLES, meshmeyek.getVertexCount(), GL_UNSIGNED_INT,0);
-            glDisableVertexAttribArray(0);
-            glDisableVertexAttribArray(1);
-            glBindVertexArray(0);
+            camera.setPosition(new Vector3f(
+                    (float)cos(GLFW.glfwGetTime())*3,
+                    1f,
+                    (float)sin(GLFW.glfwGetTime())*3
+            ));
+
+            cube.render(camera);
 
             GLFW.glfwSwapBuffers(window);
             GLFW.glfwPollEvents();

@@ -1,4 +1,4 @@
-package main;
+package main.Mesh;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -14,7 +14,7 @@ public class MeshLoader {
     private static List<Integer> vaos = new ArrayList<Integer>();
     private static List<Integer> vbos = new ArrayList<Integer>();
 
-    public static Mesh createMesh(float[] positions,float[] UVs, int[] indices) {
+    public static Mesh createMesh(float[] positions, float[] UVs, int[] indices) {
         int vao = genVAO();
         storeData(0,3,positions);
         storeData(1,2,UVs);

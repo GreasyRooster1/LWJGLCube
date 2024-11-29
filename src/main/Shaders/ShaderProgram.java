@@ -1,6 +1,7 @@
 package main.Shaders;
 
 import main.Files;
+import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.BufferUtils;
@@ -75,5 +76,11 @@ public abstract class ShaderProgram {
     }
     public void setUniform4f(String uniformName, Vector4f value) {
         glUniform4f(getUniformLocation(uniformName), value.x,value.y,value.z,value.w);
+    }
+
+    public void setUniformMatrix4f(String uniformName, Matrix4f matrix) {
+        FloatBuffer fb = BufferUtils.createFloatBuffer(16);
+        matrix.get(fb);
+        glUniformMatrix4fv(getUniformLocation(uniformName),false,fb);
     }
 }
