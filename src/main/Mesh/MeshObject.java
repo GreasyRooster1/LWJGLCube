@@ -5,6 +5,7 @@ import main.Shaders.ProjectionShaderProgram;
 import main.Texture.Texture;
 import org.joml.Matrix4f;
 
+import static main.Mesh.MeshLoader.createMesh;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glActiveTexture;

@@ -39,6 +39,7 @@ public class MeshResource extends Resource {
         }
         while (scanner.hasNextLine()) {
             String currentLine = scanner.nextLine();
+            System.out.println(currentLine);
             String[] words = currentLine.split(" ");
             switch (words[0]) {
                 case "vt":
