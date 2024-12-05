@@ -88,9 +88,19 @@ public class MeshResource extends Resource {
             c+=2;
         }
 
-        float[] outVertices = new float[vertices.size()*3];
+//        float[] outVertices = new float[vertices.size()*3];
+//        int c1 = 0;
+//        for (Vector3f vertex : vertices) {
+//            outVertices[c1]=vertex.x;
+//            outVertices[c1+1]=vertex.y;
+//            outVertices[c1+2]=vertex.z;
+//            c1+=3;
+//        }
+
+        float[] outVertices = new float[vertexIndices.size()*3];
         int c1 = 0;
-        for (Vector3f vertex : vertices) {
+        for (int ind : vertexIndices) {
+            Vector3f vertex = vertices.get(ind);
             outVertices[c1]=vertex.x;
             outVertices[c1+1]=vertex.y;
             outVertices[c1+2]=vertex.z;
@@ -100,7 +110,7 @@ public class MeshResource extends Resource {
         int[] outIndices = new int[vertexIndices.size()];
         int c2 = 0;
         for (int ind : vertexIndices) {
-            outIndices[c2]=ind;
+            outIndices[c2]=c2;
             c2++;
         }
 

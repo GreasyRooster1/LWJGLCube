@@ -20,7 +20,7 @@ public class MeshLoader {
         storeData(1,2,UVs);
         bindIndices(indices);
         glBindVertexArray(0);
-        return new Mesh(vao,indices.length);
+        return new Mesh(vao,createIntBuffer(indices),indices.length);
     }
 
     private static int genVAO() {
