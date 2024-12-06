@@ -99,12 +99,14 @@ public class Main {
                 0f,  1f
         };
 
+        glEnable(GL_DEPTH_TEST);
+
         ResourceLoader resources = new ResourceLoader("resources");
         resources.loadAllResources();
 
         Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
 
-        MeshObject cube = new MeshObject((Mesh) resources.getResource("models/cube1.obj"), new TextureShader());
+        MeshObject cube = new MeshObject((Mesh) resources.getResource("models/cube.obj"), new TextureShader());
         cube.texture = (Texture) resources.getResource("textures/065.png");
 
         glClearColor(0.1f,0.2f,0.3f,1.0f);
