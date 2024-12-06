@@ -29,7 +29,7 @@ public class MeshObject {
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, texture.textureID);
         }
-        glDrawElements(GL_LINES, mesh.getVertexCount(), GL_UNSIGNED_INT,0);
+        glDrawElements(GL_LINE_STRIP, mesh.getVertexCount(), GL_UNSIGNED_INT,0);
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         glBindVertexArray(0);

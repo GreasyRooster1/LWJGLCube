@@ -69,14 +69,17 @@ public class MeshResource extends Resource {
                     vertexIndices.add(Integer.parseInt(v1[0])-1);
                     vertexIndices.add(Integer.parseInt(v2[0])-1);
                     vertexIndices.add(Integer.parseInt(v3[0])-1);
+                    vertexIndices.add(Integer.parseInt(v1[0])-1);
 
                     uvIndices.add(Integer.parseInt(v1[1])-1);
                     uvIndices.add(Integer.parseInt(v2[1])-1);
                     uvIndices.add(Integer.parseInt(v3[1])-1);
+                    uvIndices.add(Integer.parseInt(v1[1])-1);
 
                     normalIndices.add(Integer.parseInt(v1[2])-1);
                     normalIndices.add(Integer.parseInt(v2[2])-1);
                     normalIndices.add(Integer.parseInt(v3[2])-1);
+                    normalIndices.add(Integer.parseInt(v1[2])-1);
                     break;
             }
         }
@@ -104,6 +107,7 @@ public class MeshResource extends Resource {
             outVertices[c1]=vertex.x;
             outVertices[c1+1]=vertex.y;
             outVertices[c1+2]=vertex.z;
+
             c1+=3;
         }
 

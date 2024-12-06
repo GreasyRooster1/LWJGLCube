@@ -104,7 +104,7 @@ public class Main {
 
         Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
 
-        MeshObject cube = new MeshObject((Mesh) resources.getResource("models/monkey.obj"), new TextureShader());
+        MeshObject cube = new MeshObject((Mesh) resources.getResource("models/cube1.obj"), new TextureShader());
         cube.texture = (Texture) resources.getResource("textures/065.png");
 
         glClearColor(0.1f,0.2f,0.3f,1.0f);
@@ -113,9 +113,9 @@ public class Main {
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
             camera.setPosition(new Vector3f(
-                    (float)cos(GLFW.glfwGetTime())*3,
-                    1f,
-                    (float)sin(GLFW.glfwGetTime())*3
+                    (float)cos(GLFW.glfwGetTime())*4,
+                    (float)sin(GLFW.glfwGetTime()*1.1f)*4,
+                    (float)sin(GLFW.glfwGetTime())*4
             ));
 
             cube.render(camera);
