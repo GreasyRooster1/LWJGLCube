@@ -106,8 +106,8 @@ public class Main {
 
         Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
 
-        MeshObject cube = new MeshObject((Mesh) resources.getResource("models/cube1.obj"), new TextureShader());
-        cube.texture = (Texture) resources.getResource("textures/texture.png");
+        MeshObject cube = new MeshObject((Mesh) resources.getResource("models/monkey.obj"), new TextureShader());
+        cube.texture = (Texture) resources.getResource("textures/uv.png");
 
         glClearColor(0.1f,0.2f,0.3f,1.0f);
 
