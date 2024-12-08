@@ -24,15 +24,16 @@ public class Texture {
             IntBuffer h = stack.mallocInt(1);
             IntBuffer channels = stack.mallocInt(1);
 
-            URL url = Texture.class.getResource(texturePath);
             File file = new File(texturePath);
             String filePath = file.getAbsolutePath();
+            STBImage.stbi_set_flip_vertically_on_load(true);
             buffer = STBImage.stbi_load(filePath, w, h, channels, 4);
             if(buffer ==null) {
                 throw new Exception("Can't load file "+texturePath+" "+STBImage.stbi_failure_reason());
             }
             width = w.get();
             height = h.get();
+
 
             id = glGenTextures();
             glBindTexture(GL_TEXTURE_2D, id);
