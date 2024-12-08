@@ -3,7 +3,6 @@ package main;
 import java.nio.IntBuffer;
 
 import main.Mesh.Mesh;
-import main.Mesh.MeshLoader;
 import main.Mesh.MeshObject;
 import main.Resources.ResourceLoader;
 import main.Shaders.TextureShader;
@@ -106,7 +105,7 @@ public class Main {
 
         Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
 
-        MeshObject monkey = new MeshObject((Mesh) resources.getResource("models/monkey.obj"), new TextureShader());
+        MeshObject monkey = new MeshObject((Mesh) resources.getResource("models/uvSphere.obj"), new TextureShader());
         monkey.texture = (Texture) resources.getResource("textures/monkey.png");
 
         glClearColor(0.1f,0.2f,0.3f,1.0f);

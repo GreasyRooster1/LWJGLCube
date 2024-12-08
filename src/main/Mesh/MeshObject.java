@@ -5,7 +5,6 @@ import main.Shaders.ProjectionShaderProgram;
 import main.Texture.Texture;
 import org.joml.Matrix4f;
 
-import static main.Mesh.MeshLoader.createMesh;
 import static org.lwjgl.opengl.GL30.*;
 
 public class MeshObject {
