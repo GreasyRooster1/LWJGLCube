@@ -14,10 +14,11 @@ public class MeshLoader {
     private static List<Integer> vaos = new ArrayList<Integer>();
     private static List<Integer> vbos = new ArrayList<Integer>();
 
-    public static Mesh createMesh(float[] positions, float[] UVs, int[] indices) {
+    public static Mesh createMesh(float[] positions, float[] UVs,float[] normals, int[] indices) {
         int vao = genVAO();
         storeData(0,3,positions);
         storeData(1,2,UVs);
+        storeData(2,3,normals);
         bindIndices(indices);
         glBindVertexArray(0);
         return new Mesh(vao,createIntBuffer(indices),indices.length);

@@ -84,42 +84,43 @@ public class MeshResource extends Resource {
             }
         }
         float[] outUv = new float[uvIndices.size()*2];
-        int c =0;
+        int cUv =0;
         for (int ind : uvIndices) {
             Vector2f uv = uvs.get(ind);
-            outUv[c] = uv.x;
-            outUv[c+1] = uv.y;
-            c+=2;
+            outUv[cUv] = uv.x;
+            outUv[cUv+1] = uv.y;
+            cUv+=2;
         }
 
-//        float[] outVertices = new float[vertices.size()*3];
-//        int c1 = 0;
-//        for (Vector3f vertex : vertices) {
-//            outVertices[c1]=vertex.x;
-//            outVertices[c1+1]=vertex.y;
-//            outVertices[c1+2]=vertex.z;
-//            c1+=3;
-//        }
-
         float[] outVertices = new float[vertexIndices.size()*3];
-        int c1 = 0;
+        int cVert = 0;
         for (int ind : vertexIndices) {
             Vector3f vertex = vertices.get(ind);
-            outVertices[c1]=vertex.x;
-            outVertices[c1+1]=vertex.y;
-            outVertices[c1+2]=vertex.z;
+            outVertices[cVert]=vertex.x;
+            outVertices[cVert+1]=vertex.y;
+            outVertices[cVert+2]=vertex.z;
 
-            c1+=3;
+            cVert+=3;
+        }
+
+        float[] outNormals = new float[normalIndices.size()*3];
+        int cNorm = 0;
+        for (int ind : normalIndices) {
+            Vector3f normal = normals.get(ind);
+            outNormals[cNorm]=normal.x;
+            outNormals[cNorm+1]=normal.y;
+            outNormals[cNorm+2]=normal.z;
+            cNorm+=3;
         }
 
         int[] outIndices = new int[vertexIndices.size()];
-        int c2 = 0;
+        int cInd = 0;
         for (int ind : vertexIndices) {
-            outIndices[c2]=c2;
-            c2++;
+            outIndices[cInd]=cInd;
+            cInd++;
         }
 
-        mesh = createMesh(outVertices,outUv,outIndices);
+        mesh = createMesh(outVertices,outUv,outNormals,outIndices);
 
     }
 
