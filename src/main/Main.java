@@ -79,25 +79,6 @@ public class Main {
     public void loop(){
         GL.createCapabilities();
 
-        float[] vertices = {
-                0.5f,  0.5f, 0.0f,  // top right
-                0.5f, -0.5f, 0.0f,  // bottom right
-                -0.5f, -0.5f, 0.0f,  // bottom left
-                -0.5f,  0.5f, 0.0f   // top left
-        };
-
-        int[] indices = {
-                0,1,3,
-                1,2,3
-        };
-
-        float[] uvs = {
-                1f,  1f,
-                1f, 0f,
-                0f, 0f,
-                0f,  1f
-        };
-
         glEnable(GL_DEPTH_TEST);
 
         ResourceLoader resources = new ResourceLoader("resources");
