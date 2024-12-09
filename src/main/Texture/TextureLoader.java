@@ -7,9 +7,7 @@ import java.io.File;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL30.glGenerateMipmap;
+import static org.lwjgl.opengl.GL30.*;
 
 public class TextureLoader {
     private static ByteBuffer loadData(String path,IntBuffer width,IntBuffer height){
@@ -52,20 +50,25 @@ public class TextureLoader {
         return id;
     }
 
-    public static int loadCubeMap(String path){
-        IntBuffer w = IntBuffer.allocate(1);
-        IntBuffer h = IntBuffer.allocate(1);
-        ByteBuffer buffer = loadData(path,w,h);
+    public static int loadCubeMap(String[] faces){
+        int c=0;
+        int id=glGenTextures();
+        glBindTexture(GL_TEXTURE_CUBE_MAP, id);
 
-        int id = glGenTextures();
-        glBindTexture(GL_TEXTURE_2D, id);
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w.get(), h.get(), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
-
-        glGenerateMipmap(GL_TEXTURE_2D);
-        STBImage.stbi_image_free(buffer);
-        glBindTexture(GL_TEXTURE_2D,0);
+        for(String path:faces) {
+            IntBuffer w = IntBuffer.allocate(1);
+            IntBuffer h = IntBuffer.allocate(1);
+            ByteBuffer buffer = loadData(path, w, h);
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + c,
+                    0, GL_RGB, w.get(), h.get(), 0, GL_RGB, GL_UNSIGNED_BYTE, buffer
+            );
+            c++;
+        }
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
         return id;
     }
