@@ -2,7 +2,7 @@ package main.Shaders;
 
 public class SkyBoxShader extends ProjectionShaderProgram {
     public SkyBoxShader() {
-        super("resources/shaders/normal.frag");
+        super("resources/shaders/skybox.vert","resources/shaders/skybox.frag");
     }
 
     @Override

@@ -2,7 +2,7 @@ package main.Shaders;
 
 public class TextureShader extends ProjectionShaderProgram {
     public TextureShader() {
-        super("resources/shaders/normal.frag");
+        super("resources/shaders/texture.frag");
     }
 
     @Override

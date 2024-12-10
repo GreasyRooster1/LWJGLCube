@@ -24,6 +24,14 @@ public class MeshBuilder {
         return new Mesh(vao,createIntBuffer(indices),indices.length);
     }
 
+    public static Mesh createMesh(float[] positions, int[] indices) {
+        int vao = genVAO();
+        storeData(0,3,positions);
+        bindIndices(indices);
+        glBindVertexArray(0);
+        return new Mesh(vao,createIntBuffer(indices),indices.length);
+    }
+
     private static int genVAO() {
         int vao = glGenVertexArrays();
         vaos.add(vao);

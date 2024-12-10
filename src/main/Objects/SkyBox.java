@@ -1,12 +1,89 @@
 package main.Objects;
 
+import main.Camera;
 import main.Mesh.Mesh;
 import main.Shaders.ProjectionShaderProgram;
 import main.Shaders.SkyBoxShader;
 import main.Texture.CubeMap;
 
+import static main.Mesh.MeshBuilder.createMesh;
+import static org.lwjgl.opengl.GL30.*;
+
 public class SkyBox extends MeshObject{
-    public SkyBox(Mesh mesh, CubeMap cubeMap) {
-        super(mesh, new SkyBoxShader());
+    private CubeMap cubeMap;
+    public SkyBox(CubeMap cubeMap) {
+        super(getMesh(), new SkyBoxShader());
+        this.cubeMap = cubeMap;
+    }
+
+
+
+    public void render(Camera camera){
+        //glDepthMask(false);
+        shader.passCamera(camera);
+        shader.use();
+        glDepthFunc(GL_LEQUAL);
+        glBindVertexArray(mesh.getVaoID());
+        glEnableVertexAttribArray(0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap.textureID);
+        glDrawElements(GL_TRIANGLE_STRIP, mesh.getVertexCount(), GL_UNSIGNED_INT,0);
+        glDisableVertexAttribArray(0);
+        glDepthFunc(GL_LESS);
+        //glDepthMask(true);
+    }
+
+    private static Mesh getMesh() {
+        int[] ind = new int[getMeshVertices().length];
+        for (int i = 0; i < getMeshVertices().length; i++) {
+            ind[i] =i;
+        }
+        return createMesh(getMeshVertices(),ind);
+    }
+
+    private static float[] getMeshVertices(){
+        return new float[]{
+                // positions
+                -1.0f,  1.0f, -1.0f,
+                -1.0f, -1.0f, -1.0f,
+                1.0f, -1.0f, -1.0f,
+                1.0f, -1.0f, -1.0f,
+                1.0f,  1.0f, -1.0f,
+                -1.0f,  1.0f, -1.0f,
+
+                -1.0f, -1.0f,  1.0f,
+                -1.0f, -1.0f, -1.0f,
+                -1.0f,  1.0f, -1.0f,
+                -1.0f,  1.0f, -1.0f,
+                -1.0f,  1.0f,  1.0f,
+                -1.0f, -1.0f,  1.0f,
+
+                1.0f, -1.0f, -1.0f,
+                1.0f, -1.0f,  1.0f,
+                1.0f,  1.0f,  1.0f,
+                1.0f,  1.0f,  1.0f,
+                1.0f,  1.0f, -1.0f,
+                1.0f, -1.0f, -1.0f,
+
+                -1.0f, -1.0f,  1.0f,
+                -1.0f,  1.0f,  1.0f,
+                1.0f,  1.0f,  1.0f,
+                1.0f,  1.0f,  1.0f,
+                1.0f, -1.0f,  1.0f,
+                -1.0f, -1.0f,  1.0f,
+
+                -1.0f,  1.0f, -1.0f,
+                1.0f,  1.0f, -1.0f,
+                1.0f,  1.0f,  1.0f,
+                1.0f,  1.0f,  1.0f,
+                -1.0f,  1.0f,  1.0f,
+                -1.0f,  1.0f, -1.0f,
+
+                -1.0f, -1.0f, -1.0f,
+                -1.0f, -1.0f,  1.0f,
+                1.0f, -1.0f, -1.0f,
+                1.0f, -1.0f, -1.0f,
+                -1.0f, -1.0f,  1.0f,
+                1.0f, -1.0f,  1.0f
+        };
     }
 }
