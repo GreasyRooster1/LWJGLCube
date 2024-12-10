@@ -1,6 +1,7 @@
-package main.Mesh;
+package main.Objects;
 
 import main.Camera;
+import main.Mesh.Mesh;
 import main.Shaders.ProjectionShaderProgram;
 import main.Texture.Texture;
 import org.joml.Matrix4f;

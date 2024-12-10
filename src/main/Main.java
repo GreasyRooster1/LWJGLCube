@@ -3,9 +3,11 @@ package main;
 import java.nio.IntBuffer;
 
 import main.Mesh.Mesh;
-import main.Mesh.MeshObject;
+import main.Objects.MeshObject;
+import main.Objects.SkyBox;
 import main.Resources.ResourceLoader;
 import main.Shaders.TextureShader;
+import main.Texture.CubeMap;
 import main.Texture.Texture;
 import org.joml.Vector3f;
 import org.lwjgl.opengl.GL;
@@ -86,6 +88,9 @@ public class Main {
 
         Camera camera = new Camera(new Vector3f(2f,1f,1f),new Vector3f(0f,0f,0f));
 
+        CubeMap cubeMap = new CubeMap("resources/textures/065.png");
+        MeshObject skybox = new SkyBox((Mesh) resources.getResource("models/cube1.obj"),cubeMap);
+
         MeshObject monkey = new MeshObject((Mesh) resources.getResource("models/uvSphere.obj"), new TextureShader());
         monkey.texture = (Texture) resources.getResource("textures/monkey.png");
 
@@ -101,6 +106,7 @@ public class Main {
             ));
 
             monkey.render(camera);
+            skybox.render(camera);
 
             GLFW.glfwSwapBuffers(window);
             GLFW.glfwPollEvents();
