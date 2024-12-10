@@ -105,8 +105,8 @@ public class Main {
                     (float)sin(GLFW.glfwGetTime())*4
             ));
 
-            skybox.render(camera);
             monkey.render(camera);
+            skybox.render(camera);
 
             GLFW.glfwSwapBuffers(window);
             GLFW.glfwPollEvents();

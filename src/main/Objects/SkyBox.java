@@ -11,6 +11,8 @@ import static org.lwjgl.opengl.GL30.*;
 
 public class SkyBox extends MeshObject{
     private CubeMap cubeMap;
+    private int vao;
+    private int vbo;
     public SkyBox(CubeMap cubeMap) {
         super(getMesh(), new SkyBoxShader());
         this.cubeMap = cubeMap;
@@ -19,17 +21,17 @@ public class SkyBox extends MeshObject{
 
 
     public void render(Camera camera){
-        glDepthMask(false);
+        //glDepthMask(false);
         shader.passCamera(camera);
         shader.use();
-        //glDepthFunc(GL_LEQUAL);
+        glDepthFunc(GL_LEQUAL);
         glBindVertexArray(mesh.getVaoID());
         glEnableVertexAttribArray(0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap.textureID);
-        glDrawElements(GL_TRIANGLE_STRIP, mesh.getVertexCount(), GL_UNSIGNED_INT,0);
+        glDrawElements(GL_LINE_STRIP, mesh.getVertexCount(), GL_UNSIGNED_INT,0);
         glDisableVertexAttribArray(0);
-        //glDepthFunc(GL_LESS);
-        glDepthMask(true);
+        glDepthFunc(GL_LESS);
+        //glDepthMask(true);
     }
 
     private static Mesh getMesh() {
