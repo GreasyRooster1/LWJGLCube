@@ -24,13 +24,13 @@ public class SkyBox extends MeshObject{
         //glDepthMask(false);
         shader.passCamera(camera);
         shader.use();
-        glDepthFunc(GL_LEQUAL);
+        //glDepthFunc(GL_LEQUAL);
         glBindVertexArray(mesh.getVaoID());
         glEnableVertexAttribArray(0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubeMap.textureID);
-        glDrawElements(GL_LINE_STRIP, mesh.getVertexCount(), GL_UNSIGNED_INT,0);
+        glDrawElements(GL_TRIANGLES, mesh.getVertexCount(), GL_UNSIGNED_INT,0);
         glDisableVertexAttribArray(0);
-        glDepthFunc(GL_LESS);
+        //glDepthFunc(GL_LESS);
         //glDepthMask(true);
     }
 
