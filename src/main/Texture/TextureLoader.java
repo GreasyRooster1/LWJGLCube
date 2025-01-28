@@ -61,7 +61,7 @@ public class TextureLoader {
             ByteBuffer buffer = loadData(path, w, h);
             System.out.println(w.get(0)+","+h.get(0));
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + c,
-                    0, GL_RGB, w.get(0), h.get(0), 0, GL_RGB, GL_UNSIGNED_BYTE, buffer
+                    0, GL_RGBA, w.get(0), h.get(0), 0, GL_RGBA, GL_UNSIGNED_BYTE, buffer
             );
             c++;
         }

@@ -106,7 +106,7 @@ public class Main {
             ));
 
             monkey.render(camera);
-            skybox.render(camera);
+            //skybox.render(camera);
 
             GLFW.glfwSwapBuffers(window);
             GLFW.glfwPollEvents();
