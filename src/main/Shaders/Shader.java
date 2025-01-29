@@ -10,14 +10,14 @@ import java.nio.FloatBuffer;
 
 import static org.lwjgl.opengl.GL33.*;
 
-public abstract class ShaderProgram {
+public abstract class Shader {
     private int programID;
     private int vertexID;
     private int fragmentID;
 
     private FloatBuffer matrix = BufferUtils.createFloatBuffer(16);
 
-    public ShaderProgram(String vertPath, String fragPath){
+    public Shader(String vertPath, String fragPath){
         String vertexSource = Files.loadStringFromFile(vertPath);
         String fragmentSource = Files.loadStringFromFile(fragPath);
 

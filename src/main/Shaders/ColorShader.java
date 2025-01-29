@@ -1,6 +1,6 @@
 package main.Shaders;
 
-public class ColorShader extends ShaderProgram {
+public class ColorShader extends Shader {
     public ColorShader() {
         super("resources/shaders/color.vert", "resources/shaders/color.frag");
     }

@@ -2,7 +2,6 @@ package main.Objects;
 
 import main.Camera;
 import main.Mesh.Mesh;
-import main.Shaders.ProjectionShaderProgram;
 import main.Shaders.SkyBoxShader;
 import main.Texture.CubeMap;
 import org.joml.Matrix3f;

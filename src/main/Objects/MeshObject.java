@@ -2,7 +2,7 @@ package main.Objects;
 
 import main.Camera;
 import main.Mesh.Mesh;
-import main.Shaders.ProjectionShaderProgram;
+import main.Shaders.ProjectionShader;
 import main.Texture.Texture;
 import org.joml.Matrix4f;
 
@@ -10,10 +10,10 @@ import static org.lwjgl.opengl.GL30.*;
 
 public class MeshObject {
     public Mesh mesh;
-    public ProjectionShaderProgram shader;
+    public ProjectionShader shader;
     public Texture texture;
 
-    public MeshObject(Mesh mesh, ProjectionShaderProgram shader) {
+    public MeshObject(Mesh mesh, ProjectionShader shader) {
         this.mesh = mesh;
         this.shader = shader;
     }

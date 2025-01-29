@@ -1,6 +1,6 @@
 package main.Shaders;
 
-public class SkyBoxShader extends ProjectionShaderProgram {
+public class SkyBoxShader extends ProjectionShader {
     public SkyBoxShader() {
         super("resources/shaders/skybox.vert","resources/shaders/skybox.frag");
     }

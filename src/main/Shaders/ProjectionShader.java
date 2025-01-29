@@ -1,23 +1,14 @@
 package main.Shaders;
 
 import main.Camera;
-import main.Files;
-import main.Projection;
 import org.joml.Matrix4f;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
-import org.lwjgl.BufferUtils;
 
-import java.nio.FloatBuffer;
+public abstract class ProjectionShader extends Shader {
 
-import static org.lwjgl.opengl.GL33.*;
-
-public abstract class ProjectionShaderProgram extends ShaderProgram {
-
-    public ProjectionShaderProgram(String vertPath, String fragPath) {
+    public ProjectionShader(String vertPath, String fragPath) {
         super(vertPath, fragPath);
     }
-    public ProjectionShaderProgram(String fragPath) {
+    public ProjectionShader(String fragPath) {
         super("resources/shaders/universal.vert", fragPath);
     }
 
