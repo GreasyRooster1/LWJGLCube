@@ -34,4 +34,12 @@ public abstract class ProjectionShaderProgram extends ShaderProgram {
     public void passModel(Matrix4f model){
         setUniformMatrix4f("model",model);
     }
+
+    public void passProjection(Matrix4f projection){
+        setUniformMatrix4f("projection",projection);
+    }
+
+    public void passView(Matrix4f view){
+        setUniformMatrix4f("view",view);
+    }
 }
