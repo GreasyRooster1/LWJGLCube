@@ -1,8 +1,8 @@
 package main.Shaders;
 
 public class LightingDataShader extends ProjectionShader {
-    public LightingDataShader() {
-        super("resources/shaders/texture.frag");
+    public LightingDataShader(String fragPath) {
+        super("resources/shaders/lighting/lighting.vert",fragPath);
     }
 
     @Override
