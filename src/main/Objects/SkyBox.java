@@ -5,6 +5,8 @@ import main.Mesh.Mesh;
 import main.Shaders.ProjectionShaderProgram;
 import main.Shaders.SkyBoxShader;
 import main.Texture.CubeMap;
+import org.joml.Matrix3f;
+import org.joml.Matrix4f;
 
 import static main.Mesh.MeshBuilder.createMesh;
 import static org.lwjgl.opengl.GL30.*;
@@ -22,7 +24,8 @@ public class SkyBox extends MeshObject{
 
     public void render(Camera camera){
         //glDepthMask(false);
-        shader.passCamera(camera);
+        shader.passView(new Matrix4f(new Matrix3f(camera.getView())));
+        shader.passProjection(camera.getProjection());
         shader.use();
         glDepthFunc(GL_LEQUAL);
         glBindVertexArray(mesh.getVaoID());
