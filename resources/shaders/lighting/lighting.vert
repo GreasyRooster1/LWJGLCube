@@ -10,9 +10,11 @@ uniform mat4 model;
 
 out vec2 uv;
 out vec3 normal;
+out vec3 position;
 
 void main() {
     gl_Position = projection * view * model * vec4(position,1.0);
     uv = texCoord;
     normal = norm;
+    position = gl_Position;
 }
