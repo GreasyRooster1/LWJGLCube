@@ -1,6 +1,6 @@
 #version 450 core
 
-n vec3 position;
+in vec3 position;
 in vec2 texCoord;
 in vec3 norm;
 
