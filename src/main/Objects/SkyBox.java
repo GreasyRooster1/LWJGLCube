@@ -34,6 +34,7 @@ public class SkyBox extends MeshObject{
         glDisableVertexAttribArray(0);
         glDepthFunc(GL_LESS);
         //glDepthMask(true);
+        //shader.disable();
     }
 
     private static Mesh getMesh() {

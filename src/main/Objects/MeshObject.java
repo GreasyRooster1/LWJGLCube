@@ -35,5 +35,6 @@ public class MeshObject {
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(2);
         glBindVertexArray(0);
+        //shader.disable();
     }
 }
